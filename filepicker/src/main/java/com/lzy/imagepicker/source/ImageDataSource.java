@@ -3,6 +3,7 @@ package com.lzy.imagepicker.source;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -42,6 +43,8 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     private FragmentActivity activity;
     private OnImagesLoadedListener loadedListener;                     //图片加载完成的回调接口
     private ArrayList<ImageFolder> imageFolders = new ArrayList<>();   //所有的图片文件夹
+    private Fragment fragment;
+
 
     /**
      * @param activity       用于初始化LoaderManager，需要兼容到2.3
@@ -62,16 +65,35 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
             loaderManager.initLoader(LOADER_CATEGORY, bundle, this);
         }
     }
+ /**
+     * @param fragment       用于初始化LoaderManager，需要兼容到2.3
+     * @param path           指定扫描的文件夹目录，可以为 null，表示扫描所有图片
+     * @param loadedListener 图片加载完成的监听
+     */
+    public ImageDataSource(Fragment fragment, String path, OnImagesLoadedListener loadedListener) {
+        this.fragment = fragment;
+        this.loadedListener = loadedListener;
+
+        LoaderManager loaderManager = fragment.getLoaderManager();
+        if (path == null) {
+            loaderManager.initLoader(LOADER_ALL, null, this);//加载所有的图片
+        } else {
+            //加载指定目录的图片
+            Bundle bundle = new Bundle();
+            bundle.putString("path", path);
+            loaderManager.initLoader(LOADER_CATEGORY, bundle, this);
+        }
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cursorLoader = null;
         //扫描所有图片
         if (id == LOADER_ALL)
-            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, null, null, IMAGE_PROJECTION[6] + " DESC");
+            cursorLoader = new CursorLoader(activity==null?fragment.getContext():activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, null, null, IMAGE_PROJECTION[6] + " DESC");
         //扫描某个图片文件夹
         if (id == LOADER_CATEGORY)
-            cursorLoader = new CursorLoader(activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, IMAGE_PROJECTION[1] + " like '%" + args.getString("path") + "%'", null, IMAGE_PROJECTION[6] + " DESC");
+            cursorLoader = new CursorLoader(activity==null?fragment.getContext():activity, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, IMAGE_PROJECTION[1] + " like '%" + args.getString("path") + "%'", null, IMAGE_PROJECTION[6] + " DESC");
 
         return cursorLoader;
     }
@@ -127,7 +149,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
             if (data.getCount() > 0 && allImages.size()>0) {
                 //构造所有图片的集合
                 ImageFolder allImagesFolder = new ImageFolder();
-                allImagesFolder.name = activity.getResources().getString(R.string.ip_all_images);
+                allImagesFolder.name = (activity==null?fragment.getContext():activity).getResources().getString(R.string.ip_all_images);
                 allImagesFolder.path = "/";
                 allImagesFolder.cover = allImages.get(0);
                 allImagesFolder.images = allImages;

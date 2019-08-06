@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_gravity="center"
+        android:src="@drawable/yangyue_unhappy"
+        android:layout_width="150dp"
+        android:layout_height="130dp" />
+    <TextView
+        android:textColor="#666666"
+        android:text="读取手机文件 需要文件读取权限哦"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/t_open_set"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_file_picker_err_t_bg"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="前往打开"
+        android:layout_width="100dp"
+        android:layout_height="35dp" />
+</LinearLayout>
+</RelativeLayout>

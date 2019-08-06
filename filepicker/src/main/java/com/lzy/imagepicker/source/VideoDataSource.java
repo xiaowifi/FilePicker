@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.lzy.imagepicker.bean.VideoFolder;
@@ -31,19 +32,30 @@ public class VideoDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
             MediaStore.Video.Media.HEIGHT,
             MediaStore.Video.Media.MIME_TYPE,
             MediaStore.Video.Media.DATE_ADDED};
-    AppCompatActivity activity;
+    FragmentActivity activity;
     private ArrayList<VideoFolder> videoFolders = new ArrayList<>();   //所有的图片文件夹
     OnVideoLoadedListener onVideoLoadedListener;
-
+    Fragment fragment;
     /**
      * 暂时 未传入路径，直接检索 所有信息。
      * @param activity
      * @param onVideoLoadedListener
      */
-    public VideoDataSource(AppCompatActivity activity, OnVideoLoadedListener onVideoLoadedListener) {
+    public VideoDataSource(FragmentActivity activity, OnVideoLoadedListener onVideoLoadedListener) {
         this.activity = activity;
         this.onVideoLoadedListener = onVideoLoadedListener;
         LoaderManager loaderManager = activity.getSupportLoaderManager();
+        loaderManager.initLoader(LOADER_ALL, null, this);
+    }
+    /**
+     * 暂时 未传入路径，直接检索 所有信息。
+     * @param fragment
+     * @param onVideoLoadedListener
+     */
+    public VideoDataSource(Fragment fragment, OnVideoLoadedListener onVideoLoadedListener) {
+        this.fragment = fragment;
+        this.onVideoLoadedListener = onVideoLoadedListener;
+        LoaderManager loaderManager = fragment.getLoaderManager();
         loaderManager.initLoader(LOADER_ALL, null, this);
     }
 
@@ -52,7 +64,7 @@ public class VideoDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     @Override
     public Loader<Cursor> onCreateLoader(int i, @Nullable Bundle bundle) {
         //创建查询。
-        CursorLoader cursorLoader = new CursorLoader(activity, MediaStore.Video.Media.EXTERNAL_CONTENT_URI, VIDEO_PROJECTION, null, null, VIDEO_PROJECTION[6] + " DESC");
+        CursorLoader cursorLoader = new CursorLoader(activity==null?fragment.getContext():activity, MediaStore.Video.Media.EXTERNAL_CONTENT_URI, VIDEO_PROJECTION, null, null, VIDEO_PROJECTION[6] + " DESC");
         return cursorLoader;
     }
 

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.FilePickerActivity">
+<RelativeLayout
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="45dp">
+    <ImageView
+        android:id="@+id/img_back"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        app:srcCompat="@drawable/ic_chevron_left_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_centerInParent="true"
+        android:text="本机文件"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/t_back"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:textColor="#666666"
+        android:text="取消"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</RelativeLayout>
+    <RadioGroup
+        android:id="@+id/radio_group_title"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <RadioButton
+            android:id="@+id/radio_image"
+            android:textSize="15sp"
+            android:textColor="@drawable/file_picker_radio_t_color"
+            android:button="@null"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:background="@drawable/file_picker_radio_bg"
+            android:text="图片"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:textColor="@drawable/file_picker_radio_t_color"
+            android:id="@+id/radio_doc"
+            android:textSize="15sp"
+            android:button="@null"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:background="@drawable/file_picker_radio_bg"
+            android:text="文档"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:textColor="@drawable/file_picker_radio_t_color"
+            android:id="@+id/radio_video"
+            android:textSize="15sp"
+            android:button="@null"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:background="@drawable/file_picker_radio_bg"
+            android:text="视频"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:textColor="@drawable/file_picker_radio_t_color"
+            android:id="@+id/radio_audio"
+            android:textSize="15sp"
+            android:button="@null"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:background="@drawable/file_picker_radio_bg"
+            android:text="音频"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <RadioButton
+            android:textColor="@drawable/file_picker_radio_t_color"
+            android:id="@+id/radio_other"
+            android:textSize="15sp"
+            android:button="@null"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:background="@drawable/file_picker_radio_bg"
+            android:text="其他"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </RadioGroup>
+    <FrameLayout
+        android:id="@+id/frame_file"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/lin_bottom"
+        android:orientation="horizontal"
+        android:background="#f0f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <TextView
+            android:id="@+id/t_play"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="预览"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/t_select_info"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="已选"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textColor="@drawable/file_picker_btn_t_color"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/file_picker_btn_bg"
+            android:id="@+id/t_commit"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:gravity="center"
+            android:text="发送(10)"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

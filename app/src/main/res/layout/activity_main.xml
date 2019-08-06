@@ -12,6 +12,10 @@
         android:text="图片相关"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recy_chid"
         android:layout_width="match_parent"

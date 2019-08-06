@@ -21,6 +21,11 @@ public abstract class BasePickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //设置为竖屏模式
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 getInfo();
@@ -41,9 +46,14 @@ public abstract class BasePickerActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getInfo();
             } else {
+                onNoPermissionsResult();
                 Toast.makeText(BasePickerActivity.this,"权限被禁止，无法获取本地视频",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void onNoPermissionsResult(){
+
     }
 
     public boolean checkPermission(@NonNull String permission) {
