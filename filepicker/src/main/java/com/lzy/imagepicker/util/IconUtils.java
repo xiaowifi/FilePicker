@@ -19,8 +19,8 @@ public class IconUtils {
     public static Bitmap getIconForPath(String path){
         String[] split = path.split("\\.");
         Log.e(TAG, "getIconForPath: "+new Gson().toJson(split));
-        if (split.length==2){
-           return  GetBtimapStyle1(split[1]);
+        if (split.length>=2){
+           return  GetBtimapStyle1(split[split.length-1]);
         }else {
            return GetBtimapStyle1("?");
         }

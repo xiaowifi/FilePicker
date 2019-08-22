@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
@@ -21,11 +23,13 @@ public abstract class BasePickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //设置为竖屏模式
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    /**
+     * 权限申请。
+     */
+    protected void jurisdiction() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
             if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 getInfo();

@@ -28,6 +28,7 @@ public class FilesActivity extends BasePickerActivity implements FileDataSource.
         recy_child.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         adapter = new FileAdapter(this);
         recy_child.setAdapter(adapter);
+        jurisdiction();
     }
 
     @Override

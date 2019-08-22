@@ -6,18 +6,28 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <application>
-        <!--     在AndroidManifest.xml中增加内核首次加载时优化Service声明；
-           该Service仅在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。  -->
+
+    <application android:networkSecurityConfig="@xml/network_security_config">
+        <activity android:name=".ui.DocumentsPreviewActivity"></activity>
+        <activity android:name=".ui.FilePickerByMiniTypeActivity" />
+        <activity
+            android:name=".ui.PDFShowActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ui.YulanActivity" />
+        <!--
+             在AndroidManifest.xml中增加内核首次加载时优化Service声明；
+           该Service仅在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。
+        -->
         <service
-        android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
-        android:label="dexopt"
-        android:process=":dexopt" ></service>
-        <activity android:name=".ui.PreviewActivity"></activity>
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" />
+
+        <activity android:name=".ui.PreviewActivity" />
         <activity android:name=".ui.FilePickerActivity" />
         <activity android:name=".ui.FilesActivity" />
         <activity android:name=".ui.BasePickerActivity" />

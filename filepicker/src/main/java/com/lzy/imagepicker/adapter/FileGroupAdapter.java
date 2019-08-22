@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.FileFolder;
+import com.lzy.imagepicker.callback.OnFIlePickerChangeCallBack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,12 @@ public class FileGroupAdapter extends RecyclerView.Adapter <FileGroupAdapter.Gro
     private final LayoutInflater inflater;
     List<FileFolder> folders=new ArrayList<>();
     ArrayMap<Integer,FileGroupChildAdapter> chidAdapters=new ArrayMap<>();
+    OnFIlePickerChangeCallBack onFIlePickerChangeCallBack;
+
+    public void setOnFIlePickerChangeCallBack(OnFIlePickerChangeCallBack onFIlePickerChangeCallBack) {
+        this.onFIlePickerChangeCallBack = onFIlePickerChangeCallBack;
+    }
+
     public void setFileFolders(List<FileFolder> fileFolders) {
         this.folders = fileFolders;
         notifyDataSetChanged();
@@ -68,6 +75,10 @@ public class FileGroupAdapter extends RecyclerView.Adapter <FileGroupAdapter.Gro
         }else {
             FileGroupChildAdapter adapter=new FileGroupChildAdapter(context,folders.get(i).fileItems);
             chidAdapters.put(i,adapter);
+            if (onFIlePickerChangeCallBack!=null){
+                adapter.setChangeCallBack(onFIlePickerChangeCallBack);
+            }
+
             holder.recy_child.setAdapter(adapter);
         }
     }

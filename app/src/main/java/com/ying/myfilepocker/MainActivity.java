@@ -1,28 +1,21 @@
 package com.ying.myfilepocker;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.ui.FilePickerActivity;
+import com.lzy.imagepicker.ui.FilePickerByMiniTypeActivity;
 import com.lzy.imagepicker.ui.FilesActivity;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.ui.VideosActivity;
 import com.lzy.imagepicker.util.IconUtils;
 import com.lzy.imagepicker.view.CropImageView;
-import com.tencent.smtt.sdk.QbSdk;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(VideosActivity.class,"查询视频列表"));
         acAdapter.addItem(new ActivityBean(FilesActivity.class,"文件查询"));
         acAdapter.addItem(new ActivityBean(FilePickerActivity.class,"仿QQ文件列表"));
+        acAdapter.addItem(new ActivityBean(X5Activity.class,"X5内核测试"));
+        acAdapter.addItem(new ActivityBean(FilePickerByMiniTypeActivity.class,"mini type 文件查询"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,22 +47,6 @@ public class MainActivity extends AppCompatActivity {
         img_icon = findViewById(R.id.img_icon);
         img_icon.setImageBitmap(IconUtils.getIconForPath("qqqq.doc"));
 
-        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
-
-            @Override
-            public void onViewInitFinished(boolean arg0) {
-                // TODO Auto-generated method stub
-                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-                Log.d("app", " onViewInitFinished is " + arg0);
-            }
-
-            @Override
-            public void onCoreInitFinished() {
-                // TODO Auto-generated method stub
-            }
-        };
-        //x5内核初始化接口
-        QbSdk.initX5Environment(getApplicationContext(),  cb);
        // openFileReader(this,);
     }
 

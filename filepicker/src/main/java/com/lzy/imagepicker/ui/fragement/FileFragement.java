@@ -92,9 +92,6 @@ public class FileFragement extends Fragment implements FileDataSource.OnFileLoad
     public void onFileLoaded(List<FileFolder> fileFolders) {
         getView().findViewById(R.id.lin_loading).setVisibility(View.GONE);
         Log.e(TAG, "onFileLoaded: "+new Gson().toJson(fileFolders));
-        if (fileFolders.size()>1){
-            fileFolders.remove(0);
-        }
         adapter.setFileFolders(fileFolders);
     }
 }

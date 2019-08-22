@@ -29,6 +29,7 @@ public class VideosActivity extends BasePickerActivity implements VideoDataSourc
         recy_child.setLayoutManager(new LinearLayoutManager(this));
         adapter = new VideoAdapter(this);
         recy_child.setAdapter(adapter);
+        jurisdiction();
     }
 
     @Override

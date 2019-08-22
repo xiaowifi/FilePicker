@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.DocumentsPreviewActivity">
+<LinearLayout
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="45dp">
+    <ImageView
+        android:id="@+id/img_back"
+        android:paddingRight="13dp"
+        android:paddingLeft="13dp"
+        app:srcCompat="@drawable/ic_arrow_back_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/img_left"
+        android:paddingRight="13dp"
+        android:paddingLeft="13dp"
+        app:srcCompat="@drawable/ic_fast_rewind_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/t_title"
+        android:enabled="true"
+        android:maxLines="1"
+        android:gravity="center"
+        android:text="标题"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/img_right"
+        android:paddingRight="13dp"
+        android:paddingLeft="13dp"
+        app:srcCompat="@drawable/ic_fast_forward_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/re_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

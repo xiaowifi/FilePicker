@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.FileItem;
+import com.lzy.imagepicker.callback.OnFIlePickerChangeCallBack;
 import com.lzy.imagepicker.util.IconUtils;
 
 import java.util.ArrayList;
@@ -22,6 +23,11 @@ public class FileGroupChildAdapter extends RecyclerView.Adapter<FileGroupChildAd
 
     Context context;
     private final LayoutInflater inflater;
+    OnFIlePickerChangeCallBack changeCallBack;
+
+    public void setChangeCallBack(OnFIlePickerChangeCallBack changeCallBack) {
+        this.changeCallBack = changeCallBack;
+    }
 
     List<FileItem> fileItems=new ArrayList<>();
     ArrayList<String> pickers=new ArrayList<>();
@@ -50,7 +56,11 @@ public class FileGroupChildAdapter extends RecyclerView.Adapter<FileGroupChildAd
                 }else {
                     pickers.add(fileItems.get(i).path);
                 }
+                if (changeCallBack!=null){
+                    changeCallBack.onCallback();
+                }
                 notifyItemChanged(i);
+
             }
         });
         holder.t_name.setText(fileItems.get(i).name);
@@ -76,4 +86,5 @@ public class FileGroupChildAdapter extends RecyclerView.Adapter<FileGroupChildAd
             t_info=itemView.findViewById(R.id.t_info);
         }
     }
+
 }

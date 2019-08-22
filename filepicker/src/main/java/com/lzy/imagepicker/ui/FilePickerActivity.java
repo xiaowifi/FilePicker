@@ -71,6 +71,7 @@ public class FilePickerActivity extends BasePickerActivity implements View.OnCli
         t_commit.setOnClickListener(this);
         radio_group_title = findViewById(R.id.radio_group_title);
         radio_group_title.setOnCheckedChangeListener(this);
+        jurisdiction();
     }
 
     @Override
@@ -135,32 +136,15 @@ public class FilePickerActivity extends BasePickerActivity implements View.OnCli
         }else if (id==R.id.t_play){
             //预览
             List<String> pickers = getPickers(nowClass);
-//            PreviewActivity.openActivity(view.getContext(),);
-            openFileReader(view.getContext(),pickers.get(0));
+            //openFileReader(pickers.get(0));
+//////            PreviewActivity.openActivity(view.getContext(),);
+//            Intent intent=new Intent(this,PDFShowActivity.class);
+//            intent.putExtra("path",pickers.get(0));
+//            startActivity(intent);
+           openFileReader(pickers.get(0));
         }else if (id==R.id.t_commit){
             //提交
         }
-    }
-
-
-    public void openFileReader(Context context, String pathName)
-    {
-
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("local", "true");
-        JSONObject Object = new JSONObject();
-        try
-        {
-            Object.put("pkgName",context.getApplicationContext().getPackageName());
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-        params.put("menuData",Object.toString());
-        QbSdk.getMiniQBVersion(context);
-        int ret = QbSdk.openFileReader(context, pathName, params, this);
-
     }
 
 
@@ -215,6 +199,30 @@ public class FilePickerActivity extends BasePickerActivity implements View.OnCli
             //其他的类型。
         }
     }
+
+    /**
+     * 本地播放。
+     * @param pathName
+     */
+    public void openFileReader(String pathName) {
+
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("local", "true");
+        JSONObject Object = new JSONObject();
+        try
+        {
+            Object.put("pkgName",this.getApplicationContext().getPackageName());
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        params.put("menuData",Object.toString());
+        QbSdk.getMiniQBVersion(this);
+        int ret = QbSdk.openFileReader(this, pathName, params, this);
+
+    }
+
 
     @Override
     public void onReceiveValue(String s) {
