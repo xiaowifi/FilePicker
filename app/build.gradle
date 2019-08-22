@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.ying.myfilepocker"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,9 +15,18 @@ android {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file('filepicker.jks')
+            storePassword '123456'
+            keyAlias 'filepicker'
+            keyPassword '123456'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

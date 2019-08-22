@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <application android:networkSecurityConfig="@xml/network_security_config">
+    <application  android:networkSecurityConfig="@xml/network_security_config">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity android:name=".ui.DocumentsPreviewActivity"></activity>
         <activity android:name=".ui.FilePickerByMiniTypeActivity" />
         <activity
@@ -60,6 +61,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <!--X5加速-->
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" ></service>
     </application>
 
 </manifest>

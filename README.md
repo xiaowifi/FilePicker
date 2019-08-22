@@ -20,8 +20,19 @@ ImageDataSource 大佬写的图片查询。
 VideoDataSource 视频查询。
 FileDataByMiniTypeSource 传入文件后缀名显示查询文件。主要是觉得文件后缀名查询太慢了，然后更新了下，主要是将后缀名改为 minitype 查询了。
 
+
+
 最近 把X5 接入了。
+Android 9配置 xml 然后还是 不能自动 加载 x5  内核 
+那么 就只有 一个方法 了 
+
+targetSdkVersion  改为27  或者以下。
+
 适配了Android 9。
 主要是应用内打开 预览文件。相关代码 在DocumentsPreviewActivity 这个里面。
 
 然后把pdf 预览 的接进来了，有点重复，但是无关紧要吧。
+
+2019年08月22日
+
+把 腾讯 x5的官方 module  导入到项目里面。
