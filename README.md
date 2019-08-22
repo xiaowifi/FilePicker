@@ -1,4 +1,15 @@
 # FilePicker
+图片选择 部分。
+
+https://github.com/jeasonlzy/ImagePicker
+
+鲁班 图片压缩：
+https://github.com/Curzibn/Luban
+
+图片缩放旋转。
+
+https://github.com/chrisbanes/PhotoView
+
 在某位大佬的图片选择器 基础上 加了几行代码 ，用于传入 后缀名 查询出本地所有或者传入路径里面的对应文件。
 通过后缀名 或者 path 查询 对应文件的MINITYPE
 URLConnection.guessContentTypeFromName(url);
