@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(FilePickerActivity.class,"仿QQ文件列表"));
         acAdapter.addItem(new ActivityBean(X5Activity.class,"X5内核测试"));
         acAdapter.addItem(new ActivityBean(FilePickerByMiniTypeActivity.class,"mini type 文件查询"));
+        acAdapter.addItem(new ActivityBean(RedSpotActivity.class,"小红点测试"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,42 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.PDFShowActivity">
-<com.github.barteksc.pdfviewer.PDFView
+<com.lzy.imagepicker.pdfviewer.PDFView
     android:id="@+id/pdf_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-</com.github.barteksc.pdfviewer.PDFView>
+</com.lzy.imagepicker.pdfviewer.PDFView>
     <ImageView
         android:id="@+id/img_back"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/ic_arrow_back"
+        app:srcCompat="@drawable/ic_file_picker_back"
         android:layout_width="50dp"
         android:layout_height="50dp" />
-    <LinearLayout
+    <com.lzy.imagepicker.view.RedSpotView
+        android:id="@+id/red_view"
         android:visibility="gone"
-        android:id="@+id/lin_content"
-        android:orientation="vertical"
-        android:background="#2D000000"
-        android:layout_width="50dp"
-        android:layout_height="match_parent">
-
-        <TextView
-
-            android:id="@+id/t_top"
-            android:text="上一张"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-        <TextView
-            android:id="@+id/t_next"
-            android:text="下一张"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

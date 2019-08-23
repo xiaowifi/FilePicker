@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -142,6 +143,17 @@ public class DocumentsPreviewActivity extends AppCompatActivity implements  TbsR
                 if (showPage!=paths.size()-1){
                     displayFile(showPage+1);
                 }
+            }
+        });
+        findViewById(R.id.t_play).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (paths.get(showPage).endsWith(".pdf")){
+                    PDFShowActivity.openactivity(view.getContext(),paths.get(showPage));
+                }else {
+                    Toast.makeText(view.getContext(),"暂支持pdf",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

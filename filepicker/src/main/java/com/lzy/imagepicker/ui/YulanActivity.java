@@ -1,5 +1,7 @@
 package com.lzy.imagepicker.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,12 @@ public class YulanActivity extends AppCompatActivity implements TbsReaderView.Re
     String path;
     private RelativeLayout re_contentƒ;
     private TbsReaderView mTbsReaderView;
+
+    public static void openActivity(Context context,String path){
+        Intent intent= new Intent(context,YulanActivity.class);
+        intent.putExtra("path",path);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

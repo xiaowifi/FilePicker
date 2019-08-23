@@ -49,6 +49,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </RelativeLayout>
+        <TextView
+            android:id="@+id/t_play"
+            android:padding="10dp"
+            android:text="播放"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
 </LinearLayout>
