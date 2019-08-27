@@ -1,1 +1,1 @@
-include ':app', ':filepicker', ':X5WebDemo'
+include ':app', ':filepicker'

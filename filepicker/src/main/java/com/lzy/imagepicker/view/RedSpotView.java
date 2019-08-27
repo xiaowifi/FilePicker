@@ -23,6 +23,7 @@ public class RedSpotView extends View implements View.OnTouchListener {
     private Paint mPaint;
     private float x=0;
     private float y=0;
+    private int dpm;
 
     public RedSpotView(Context context) {
         super(context);
@@ -58,14 +59,15 @@ public class RedSpotView extends View implements View.OnTouchListener {
      */
     public void onShow(float x,float y){
         this.x=x;
-        this.y=y;
+        this.y=y-dpm;
         show=true;
         invalidate();
     }
 
     private void initView() {
         this.setOnTouchListener(this);
-        dpSpot = dp2px(20);
+        dpSpot = dp2px(10);
+        dpm = dp2px(30);
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setAntiAlias(true);
@@ -81,7 +83,7 @@ public class RedSpotView extends View implements View.OnTouchListener {
             show=true;
         }else if (event.getAction()==MotionEvent.ACTION_MOVE){
             x = event.getX();
-            y = event.getY();
+            y = event.getY()-dpm;
             invalidate();
         }
         return true;

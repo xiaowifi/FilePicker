@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.PDFPlayActivity;
 import com.lzy.imagepicker.ui.FilePickerActivity;
 import com.lzy.imagepicker.ui.FilePickerByMiniTypeActivity;
 import com.lzy.imagepicker.ui.FilesActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(X5Activity.class,"X5内核测试"));
         acAdapter.addItem(new ActivityBean(FilePickerByMiniTypeActivity.class,"mini type 文件查询"));
         acAdapter.addItem(new ActivityBean(RedSpotActivity.class,"小红点测试"));
+        acAdapter.addItem(new ActivityBean(PDFPlayActivity.class,"pdf编辑"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override
