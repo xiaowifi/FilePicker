@@ -3,6 +3,7 @@ package com.lzy.imagepicker;
 import android.app.Application;
 import android.util.Log;
 
+import com.lzy.okgo.OkGo;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -45,17 +46,10 @@ public class MyFilePicker {
             @Override
             public void onViewInitFinished(boolean b) {
                 x5down=b;
-                Log.e(TAG, "onViewInitFinished: "+b );
-                if (!x5down){
-                    //下载X5内核。
-                    downX5();
-                }
             }
 
         });
+        OkGo.getInstance().init(application);
     }
 
-    private void downX5() {
-
-    }
 }

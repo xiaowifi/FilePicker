@@ -14,7 +14,9 @@ import com.lzy.imagepicker.ui.FilePickerActivity;
 import com.lzy.imagepicker.ui.FilePickerByMiniTypeActivity;
 import com.lzy.imagepicker.ui.FilesActivity;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.ui.ShowFragmentActivity;
 import com.lzy.imagepicker.ui.VideosActivity;
+import com.lzy.imagepicker.ui.X5Activity;
 import com.lzy.imagepicker.util.IconUtils;
 import com.lzy.imagepicker.view.CropImageView;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(FilePickerByMiniTypeActivity.class,"mini type 文件查询"));
         acAdapter.addItem(new ActivityBean(RedSpotActivity.class,"小红点测试"));
         acAdapter.addItem(new ActivityBean(PDFPlayActivity.class,"pdf编辑"));
+        acAdapter.addItem(new ActivityBean(ShowFragmentActivity.class,"fragment 预览加载"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lzy.imagepicker">
-    <!-- 在SDCard中创建与删除文件权限 -->
+    <!-- 从SDCard读取数据权限 -->
     <application android:networkSecurityConfig="@xml/network_security_config">
-        <activity android:name=".PDFPlayActivity"></activity>
-
+        <activity android:name=".ui.ShowFragmentActivity"></activity>
+        <activity android:name=".PDFPlayActivity" />
         <activity android:name=".ui.DocumentsPreviewActivity" />
-
         <activity android:name=".ui.FilePickerByMiniTypeActivity" />
         <activity
             android:name=".ui.PDFShowActivity"
@@ -18,11 +17,11 @@
            该Service仅在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。
         -->
         <activity android:name=".ui.FilePickerActivity" />
-
         <activity android:name=".ui.FilesActivity" />
         <activity android:name=".ui.BasePickerActivity" />
         <activity android:name=".ui.VideosActivity" />
         <activity android:name=".ui.ImageBaseActivity" />
+        <activity android:name=".ui.X5Activity" />
         <activity
             android:name=".ui.ImageGridActivity"
             android:configChanges="orientation|screenSize"
@@ -40,6 +39,7 @@
             android:name=".ui.ImagePreviewDelActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/ImagePickerThemeFullScreen" />
+
         <provider
             android:name=".ImagePickerProvider"
             android:authorities="${applicationId}.provider"
@@ -49,11 +49,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
             android:process=":dexopt" />
-
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
@@ -61,15 +61,15 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-    </application> <!-- 往SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 从SDCard读取数据权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 相机权限 -->
+    </application> <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

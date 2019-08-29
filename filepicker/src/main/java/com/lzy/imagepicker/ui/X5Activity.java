@@ -1,8 +1,9 @@
-package com.ying.myfilepocker;
+package com.lzy.imagepicker.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.view.X5WebView;
 
 public class X5Activity extends AppCompatActivity {
