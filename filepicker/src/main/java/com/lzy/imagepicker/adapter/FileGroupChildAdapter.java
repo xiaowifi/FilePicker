@@ -65,7 +65,7 @@ public class FileGroupChildAdapter extends RecyclerView.Adapter<FileGroupChildAd
         });
         holder.t_name.setText(fileItems.get(i).name);
         holder.t_info.setText(fileItems.get(i).addTime+"  "+fileItems.get(i).size);
-        holder.image.setImageBitmap(IconUtils.getIconForPath(fileItems.get(i).path));
+        holder.image.setImageBitmap(IconUtils.getFileIconForPath(fileItems.get(i).path,context));
     }
 
     @Override

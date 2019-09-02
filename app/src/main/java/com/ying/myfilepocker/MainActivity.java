@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         img_icon = findViewById(R.id.img_icon);
-        img_icon.setImageBitmap(IconUtils.getIconForPath("qqqq.doc"));
+        img_icon.setImageBitmap(IconUtils.getFileIconForPath("qqqq.doc",this));
 
        // openFileReader(this,);
     }

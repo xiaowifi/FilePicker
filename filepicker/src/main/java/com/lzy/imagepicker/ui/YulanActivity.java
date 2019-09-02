@@ -37,6 +37,7 @@ public class YulanActivity extends AppCompatActivity implements TbsReaderView.Re
         re_contentƒ.addView(mTbsReaderView,new RelativeLayout.LayoutParams(-1,-1));
         displayFile(path);
 
+
     }
     private String tbsReaderTemp = Environment.getExternalStorageDirectory() + "/TbsReaderTemp";
 

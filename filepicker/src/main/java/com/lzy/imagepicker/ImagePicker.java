@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.loader.ImageGlideImageLoader;
 import com.lzy.imagepicker.loader.ImageLoader;
 import com.lzy.imagepicker.util.ProviderUtil;
 import com.lzy.imagepicker.util.Utils;
@@ -384,5 +385,20 @@ public class ImagePicker {
         outState.putInt("focusWidth", focusWidth);
         outState.putInt("focusHeight", focusHeight);
     }
-
+    /**
+     * 设置为单选模式。
+     */
+    public void radioStyle(){
+        this.setImageLoader(new ImageGlideImageLoader());   //设置图片加载器
+        this.setMultiMode(false);
+        this.setShowCamera(true);  //显示拍照按钮
+        this.setCrop(true);        //允许裁剪（单选才有效）
+        this.setSaveRectangle(true); //是否按矩形区域保存
+        this.setSelectLimit(1);    //选中数量限制
+        this.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        this.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        this.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        this.setOutPutX(1000);//保存文件的宽度。单位像素
+        this.setOutPutY(1000);//保存文件的高度。单位像素
+    }
 }

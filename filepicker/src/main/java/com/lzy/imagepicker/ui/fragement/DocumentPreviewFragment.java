@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.lzy.imagepicker.MyFilePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.ui.PDFShowActivity;
 import com.lzy.imagepicker.ui.X5Activity;
+import com.lzy.imagepicker.util.IconUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
@@ -36,8 +38,8 @@ import java.text.DecimalFormat;
  */
 public class DocumentPreviewFragment extends Fragment implements View.OnClickListener, TbsReaderView.ReaderCallback {
     private TbsReaderView mTbsReaderView;
-    private String tbsReaderTemp = Environment.getExternalStorageDirectory() + "/TbsReaderTemp";
-    private String downPath=Environment.getExternalStorageDirectory()+"/yibaitong.down.file";
+    private static final String tbsReaderTemp = Environment.getExternalStorageDirectory() + "/TbsReaderTemp";
+    public static final String downPath=Environment.getExternalStorageDirectory()+"/yibaitong.down.file";
 
     private String path="http://192.168.1.51:10010/renqin/uploadfile/file/学习平台使用及常见疑问指导.pptx";
     private RelativeLayout reContent;
@@ -47,6 +49,8 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
     private TextView tErr;
     private TextView tBtn;
     private String fileName="";
+    private ImageView img_file;
+
     public DocumentPreviewFragment setPath(String path) {
         this.path = path;
         return this;
@@ -84,14 +88,22 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
         }
         //设置是否打开。
         tPlay.setVisibility(path.endsWith(".pdf")?View.VISIBLE:View.GONE);
-
+        img_file.setImageBitmap(IconUtils.getFileIconForPath(path,getContext()));
         Bundle bundle = new Bundle();
         bundle.putString("filePath", path);
         bundle.putString("tempPath", tbsReaderTemp);
         String[] paths = path.split("\\.");
+        String[] names= path.split("/");
         if (path.startsWith("http")){
+            String localUrl=downPath+"/"+names[names.length-1];
+            //判断当前文件是否在本地文件库里面，如果存在。就直接显示了。
+            if (new File(localUrl).exists()){
+                path=localUrl;
+                displayFile();
+                return;
+            }
             relatErr.setVisibility(View.VISIBLE);
-            tTitle.setText(""+paths[paths.length - 1]);
+            tTitle.setText(""+names[names.length-1]);
             tErr.setText("当前文件为网络资源，请先下载后预览播放");
             tBtn.setText("下载");
             return;
@@ -100,11 +112,11 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
             fileName=paths[paths.length - 1];
             boolean result = mTbsReaderView.preOpen(paths[paths.length - 1], false);
             Log.e("YulanActivity", "查看文档---" + result);
-            if (result) {
+            //if (result) {
                 mTbsReaderView.openFile(bundle);
             } else {
                 relatErr.setVisibility(View.VISIBLE);
-                tTitle.setText(""+paths[paths.length - 1]);
+                tTitle.setText(""+names[names.length-1]);
                 if (path.startsWith("http")){
                     tErr.setText("当前文件为网络资源，请先下载后预览播放");
                     tBtn.setText("下载");
@@ -116,7 +128,7 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
                     tBtn.setText("其他应用打开");
                 }
             }
-        }
+
     }
 
     /**
@@ -192,6 +204,8 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
      * 网络请求下载文件。
      */
     private void toDown() {
+
+
         OkGo.<File>get(path)
                 .tag(path)
                 .execute(new FileCallback(downPath,fileName){
@@ -234,6 +248,7 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
         tBtn =  view.findViewById(R.id.t_btn);
         reContent = view.findViewById(R.id.re_content);
         tPlay = view.findViewById(R.id.t_play);
+        img_file = view.findViewById(R.id.img_file);
         tPlay.setOnClickListener(this);
         tBtn.setOnClickListener(this);
     }
