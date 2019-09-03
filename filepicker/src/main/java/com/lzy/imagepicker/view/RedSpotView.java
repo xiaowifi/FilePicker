@@ -15,7 +15,7 @@ import android.view.View;
 /**
  * 一个全屏小红点哦。
  */
-public class RedSpotView extends View implements View.OnTouchListener {
+public class RedSpotView extends View {
     String TAG=this.getClass().getName();
 
     boolean show=false;
@@ -49,6 +49,7 @@ public class RedSpotView extends View implements View.OnTouchListener {
             canvas.drawCircle(
                     x, y, dpSpot/2, mPaint
             );
+            show=false;
         }
     }
 
@@ -65,7 +66,6 @@ public class RedSpotView extends View implements View.OnTouchListener {
     }
 
     private void initView() {
-        this.setOnTouchListener(this);
         dpSpot = dp2px(10);
         dpm = dp2px(30);
         mPaint = new Paint();
@@ -74,20 +74,7 @@ public class RedSpotView extends View implements View.OnTouchListener {
     }
 
 
-    @Override
-    public boolean onTouch(View view, MotionEvent event) {
-       Log.e(TAG, "onTouch: " );
-        if (event.getAction() == MotionEvent.ACTION_UP){
-            show=false;
-        }else if (event.getAction()==MotionEvent.ACTION_DOWN){
-            show=true;
-        }else if (event.getAction()==MotionEvent.ACTION_MOVE){
-            x = event.getX();
-            y = event.getY()-dpm;
-            invalidate();
-        }
-        return true;
-    }
+
 
     /**
      * dp转px

@@ -3,7 +3,7 @@ package com.lzy.imagepicker;
 import android.app.Application;
 import android.util.Log;
 
-import com.lzy.okgo.OkGo;
+import com.lzy.imagepicker.okgo.OkGo;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 

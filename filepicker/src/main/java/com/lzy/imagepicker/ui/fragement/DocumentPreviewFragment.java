@@ -20,13 +20,14 @@ import android.widget.Toast;
 
 import com.lzy.imagepicker.MyFilePicker;
 import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.okgo.OkGo;
+import com.lzy.imagepicker.okgo.callback.FileCallback;
+import com.lzy.imagepicker.okgo.model.Progress;
+import com.lzy.imagepicker.okgo.model.Response;
 import com.lzy.imagepicker.ui.PDFShowActivity;
 import com.lzy.imagepicker.ui.X5Activity;
 import com.lzy.imagepicker.util.IconUtils;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.model.Progress;
-import com.lzy.okgo.model.Response;
+
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import java.io.File;

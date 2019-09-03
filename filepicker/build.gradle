@@ -33,9 +33,6 @@ dependencies {
     //本地 微服务器。
     api 'org.nanohttpd:nanohttpd:2.3.1'
     api 'com.github.barteksc:pdfium-android:1.9.0'
-    //必须使用
-    implementation 'com.lzy.net:okgo:3.0.4'
+    api 'com.squareup.okhttp3:okhttp:3.8.1'
 
 }
-
-
