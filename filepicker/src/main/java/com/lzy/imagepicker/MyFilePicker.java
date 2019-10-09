@@ -2,12 +2,17 @@ package com.lzy.imagepicker;
 
 import android.app.Application;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.lzy.imagepicker.okgo.OkGo;
+import com.lzy.imagepicker.okgo.interceptor.HttpLoggingInterceptor;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+
+import okhttp3.OkHttpClient;
 
 public class MyFilePicker {
     String TAG=this.getClass().getName();
@@ -49,8 +54,20 @@ public class MyFilePicker {
             }
 
         });
-        OkGo.getInstance().init(application);
-
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("okhttp");
+        //log打印级别，决定了log显示的详细程度
+        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        //log颜色级别，决定了log在控制台显示的颜色
+        loggingInterceptor.setColorLevel(Level.INFO);
+        builder.addInterceptor(loggingInterceptor);
+        OkGo.getInstance().init(application).setOkHttpClient(builder.build());
     }
 
+    public int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+
+    public void setFlag(int flag){
+        this.flag=flag;
+
+    }
 }

@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recy_chid;
     private AcAdapter acAdapter;
     private ImageView img_icon;
+    private ImageView img_start;
+    private RecyclerView recy_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(PDFPlayActivity.class,"pdf编辑"));
         acAdapter.addItem(new ActivityBean(ShowFragmentActivity.class,"fragment 预览加载"));
         acAdapter.addItem(new ActivityBean(VideoPlayerActivity.class,"视频播放器"));
+        acAdapter.addItem(new ActivityBean(DialogFragmentActivity.class,"dialog测试"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         });
         img_icon = findViewById(R.id.img_icon);
         img_icon.setImageBitmap(IconUtils.getFileIconForPath("qqqq.doc",this));
+        img_start = findViewById(R.id.img_start);
+        com.lzy.imagepicker.util.GlideImageLoader.loadCircleBorder("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567764472396&di=b1d356f21db9ab9eb3679e861ad999cd&imgtype=0&src=http%3A%2F%2Fimg.99danji.com%2Fuploadfile%2F2017%2F1122%2F20171122051423532.jpg",img_start,5);
+        recy_image = findViewById(R.id.recy_image);
+        LinearLayoutManager manager= new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recy_image.setLayoutManager(manager);
+        MainImageAdapter imageAdapter=new MainImageAdapter(this);
+        recy_image.setAdapter(imageAdapter);
 
        // openFileReader(this,);
     }

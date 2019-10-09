@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文件查找，通过后缀名查找。
+ * 文件查找，通过minitype
  */
 public class FilePickerByMiniTypeActivity extends BasePickerActivity implements View.OnClickListener, FileDataByMiniTypeSource.OnFileLoadedListener, OnFIlePickerChangeCallBack {
 
@@ -58,7 +58,6 @@ public class FilePickerByMiniTypeActivity extends BasePickerActivity implements 
         querySuffixs.add(".dot");
         querySuffixs.add(".dotm");
         querySuffixs.add(".dotx");
-       // querySuffixs.add(".html");
         querySuffixs.add(".mht");
         querySuffixs.add(".rtf");
         querySuffixs.add(".wps");
@@ -87,6 +86,7 @@ public class FilePickerByMiniTypeActivity extends BasePickerActivity implements 
         querySuffixs.add(".emmx");
         querySuffixs.add(".mmap");
         querySuffixs.add(".mm");
+        querySuffixs.add(".mp4");
     }
 
     private void initView() {
@@ -118,6 +118,10 @@ public class FilePickerByMiniTypeActivity extends BasePickerActivity implements 
             //提交
         }else if (id==R.id.t_play){
             //预览。
+            if (adapter.getPickers().size()==0){
+
+                return;
+            }
             DocumentsPreviewActivity.openactivity(this,adapter.getPickers());
         }
     }

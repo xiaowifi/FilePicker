@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.lzy.imagepicker.pdfviewer.PDFView
+        android:id="@+id/pdf_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.lzy.imagepicker.pdfviewer.PDFView>
+    <ImageView
+        android:id="@+id/img_back"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:srcCompat="@drawable/ic_file_picker_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <com.lzy.imagepicker.view.RedSpotView
+        android:id="@+id/red_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

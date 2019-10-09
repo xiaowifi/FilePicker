@@ -12,12 +12,27 @@
         android:text="图片相关"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
-    <ImageView
-        android:id="@+id/img_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <ImageView
+            android:id="@+id/img_start"
+            android:layout_marginLeft="10dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"/>
+    </LinearLayout>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recy_image"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recy_chid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -207,10 +207,11 @@ public class LyVideoView extends RelativeLayout implements View.OnTouchListener 
                 showRed=!showRed;
                 img_back.setVisibility(showRed?GONE:VISIBLE);
                 lin_bottom.setVisibility(showRed?GONE:VISIBLE);
+            }else {
+                red_view.setVisibility(GONE);
             }
         }else if (event.getAction()==MotionEvent.ACTION_DOWN){
             downtime = System.currentTimeMillis();
-            red_view.setVisibility(GONE);
         }else if (event.getAction()==MotionEvent.ACTION_MOVE){
             if (showRed){
                 red_view.setVisibility(VISIBLE);
