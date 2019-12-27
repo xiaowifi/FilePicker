@@ -46,6 +46,11 @@ public class LyVideoView extends RelativeLayout implements View.OnTouchListener 
     MediaPlayer mmediaPlayer;
     Handler handler=new Handler();
     private long duration;
+    private ImageView img_set;
+
+    public RedSpotView getRed_view() {
+        return red_view;
+    }
 
     public void setPath(String path) {
         this.path = path;
@@ -73,12 +78,21 @@ public class LyVideoView extends RelativeLayout implements View.OnTouchListener 
         return img_back;
     }
 
+    public ImageView getImg_set() {
+        return img_set;
+    }
+
+    public void setImg_set(ImageView img_set) {
+        this.img_set = img_set;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void initViews() {
         //添加子项到内容中。
         addView(LayoutInflater.from(getContext()).inflate(R.layout.ly_video_manger,null));
         video_content = findViewById(R.id.video_content);
         img_back = findViewById(R.id.imge_back);
+        img_set = findViewById(R.id.img_set);
         red_view = findViewById(R.id.red_view);
         image_video_play = findViewById(R.id.image_video_play);
         bottom_seek_progress = findViewById(R.id.bottom_seek_progress);

@@ -9,4 +9,16 @@
     <color name="ip_color_accent">#1AAD19</color>
     <color name="ip_text_secondary_inverted">#5C0F0F0F</color>
     <color name="ip_text_primary_inverted">#ffffff</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="read_c_1">#FFFFFF</color>
+    <color name="read_c_2">#000000</color>
+    <color name="read_c_3">#F44336</color>
+    <color name="read_c_4">#E91E63</color>
+    <color name="read_c_5">#3F51B5</color>
+    <color name="read_c_6">#03A9F4</color>
+    <color name="read_c_7">#00BCD4</color>
+    <color name="read_c_8">#009688</color>
+    <color name="read_c_9">#FF9800</color>
+    <color name="read_c_10">#FF5722</color>
 </resources>

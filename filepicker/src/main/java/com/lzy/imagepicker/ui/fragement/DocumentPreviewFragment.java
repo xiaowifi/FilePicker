@@ -21,9 +21,14 @@ import android.widget.Toast;
 import com.lzy.imagepicker.MyFilePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.okgo.OkGo;
+import com.lzy.imagepicker.okgo.cache.CacheMode;
 import com.lzy.imagepicker.okgo.callback.FileCallback;
 import com.lzy.imagepicker.okgo.model.Progress;
 import com.lzy.imagepicker.okgo.model.Response;
+import com.lzy.imagepicker.okgo.request.GetRequest;
+import com.lzy.imagepicker.okgo.request.base.Request;
+import com.lzy.imagepicker.okserver.OkDownload;
+import com.lzy.imagepicker.okserver.download.DownloadListener;
 import com.lzy.imagepicker.ui.PDFShowActivity;
 import com.lzy.imagepicker.ui.X5Activity;
 import com.lzy.imagepicker.util.IconUtils;
@@ -31,7 +36,9 @@ import com.lzy.imagepicker.util.IconUtils;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 
 /**
@@ -41,8 +48,8 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
     private TbsReaderView mTbsReaderView;
     private static final String tbsReaderTemp = Environment.getExternalStorageDirectory() + "/TbsReaderTemp";
     public static final String downPath=Environment.getExternalStorageDirectory()+"/yibaitong.down.file";
-
-    private String path="http://192.168.1.51:10010/renqin/uploadfile/file/学习平台使用及常见疑问指导.pptx";
+    String TAG="DocumentPreviewFragment";
+    private String path="http://192.168.1.51:10010/renqin/uploadfile/file/Java%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%20%20%E8%AE%A9%E4%BD%A0%E7%9A%84Java%E7%A8%8B%E5%BA%8F%E6%9B%B4%E5%BF%AB%E3%80%81%E6%9B%B4%E7%A8%B3%E5%AE%9A.pdf";
     private RelativeLayout reContent;
     private TextView tPlay;
     private RelativeLayout relatErr;
@@ -51,7 +58,7 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
     private TextView tBtn;
     private String fileName="";
     private ImageView img_file;
-
+    DecimalFormat df = new DecimalFormat("#.00");
     public DocumentPreviewFragment setPath(String path) {
         this.path = path;
         return this;
@@ -104,31 +111,37 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
                 return;
             }
             relatErr.setVisibility(View.VISIBLE);
-            tTitle.setText(""+names[names.length-1]);
+            try {
+                tTitle.setText(""+URLDecoder.decode(names[names.length-1], "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                tTitle.setText(names[names.length-1]);
+            }
             tErr.setText("当前文件为网络资源，请先下载后预览播放");
             tBtn.setText("下载");
             return;
         }
         if (paths.length >= 2) {
-            fileName=paths[paths.length - 1];
+            fileName = paths[paths.length - 1];
             boolean result = mTbsReaderView.preOpen(paths[paths.length - 1], false);
             Log.e("YulanActivity", "查看文档---" + result);
-            //if (result) {
+            if (result) {
                 mTbsReaderView.openFile(bundle);
             } else {
                 relatErr.setVisibility(View.VISIBLE);
-                tTitle.setText(""+names[names.length-1]);
-                if (path.startsWith("http")){
+                tTitle.setText("" + names[names.length - 1]);
+                if (path.startsWith("http")) {
                     tErr.setText("当前文件为网络资源，请先下载后预览播放");
                     tBtn.setText("下载");
-                }else if (!MyFilePicker.init().isX5down()){
+                } else if (result==false) {
                     tErr.setText("系统检测内核加载失败，请点击 手动下载内核 ，打开界面后，选择 安装线上内核");
                     tBtn.setText("手动下载内核");
-                }else {
+                } else {
                     tErr.setText("未知错误，当前文件无法被打开，请使用其他应用打开");
                     tBtn.setText("其他应用打开");
                 }
             }
+        }
 
     }
 
@@ -178,6 +191,7 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view==tBtn){
+            Log.e(TAG, "onClick: tBtn" );
             if (tBtn.getText().toString().equals("其他应用打开")){
                 show(path);
             }else if (tBtn.getText().toString().equals("手动下载内核")){
@@ -191,8 +205,11 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
                 OkGo.getInstance().cancelTag(path);
             }else if (tBtn.getText().toString().equals("继续下载")){
                 toDown();
+            }else {
+                toDown();
             }
         }else if (view==tPlay){
+            Log.e(TAG, "onClick: tPlay" );
             if (path.endsWith(".pdf")){
                 PDFShowActivity.openactivity(getContext(),path);
             }else {
@@ -205,37 +222,50 @@ public class DocumentPreviewFragment extends Fragment implements View.OnClickLis
      * 网络请求下载文件。
      */
     private void toDown() {
-
-
-        OkGo.<File>get(path)
-                .tag(path)
-                .execute(new FileCallback(downPath,fileName){
+        GetRequest<File> request = OkGo.<File>get(path);
+        OkDownload.request(path, request)//
+                .save()//
+                .register(new DownloadListener(path) {
                     @Override
-                    public void onSuccess(Response<File> response) {
-                        Toast.makeText(getContext(),"下载完成",Toast.LENGTH_SHORT).show();
-                        path=response.body().getPath();
+                    public void onStart(Progress progress) {
+                        tBtn.setText("开始下载");
+                    }
+
+                    @Override
+                    public void onProgress(Progress progress) {
+                        tBtn.setText("下载中("+df.format(progress.fraction*100f)+"% "+(progress.speed/1024)+"kb/s )");
+
+                    }
+
+                    @Override
+                    public void onError(Progress progress) {
+                        tErr.setText("下载失败，请稍后重试");
+                        tBtn.setText("下载");
+                    }
+
+                    @Override
+                    public void onFinish(File file, Progress progress) {
+                        path=file.getPath();
+                        Log.e(TAG, "onCacheSuccess: " +path);
                         displayFile();
                     }
 
                     @Override
-                    public void downloadProgress(Progress progress) {
-                        super.downloadProgress(progress);
-                        DecimalFormat df = new DecimalFormat("#.00");
-                        tBtn.setText("下载中("+df.format(progress.fraction*100f)+"% "+(progress.speed/1024)+"kb/s )");
-                    }
+                    public void onRemove(Progress progress) {
 
-                    @Override
-                    public void onError(Response<File> response) {
-                        super.onError(response);
-                        tErr.setText("下载失败，请稍后重试");
-                        tBtn.setText("下载");
                     }
-                });
+                })
+                .start();
     }
 
     @Override
     public void onCallBackAction(Integer integer, Object o, Object o1) {
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     /**

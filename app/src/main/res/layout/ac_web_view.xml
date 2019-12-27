@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".WebViewActivity">
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <EditText
+            android:text="https://www.baidu.com"
+            android:id="@+id/ed_info"
+            android:hint="请输入加载网址"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/t_btn"
+            android:gravity="center"
+            android:paddingRight="13dp"
+            android:paddingLeft="13dp"
+            android:text="加载"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <com.lzy.imagepicker.view.X5WebView
+        android:id="@+id/web_x5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

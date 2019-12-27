@@ -23,4 +23,12 @@
         <!-- 指定消失的动画xml -->
         <item name="android:windowExitAnimation">@anim/hide_to_bottom</item>
     </style>
+
+    <style name="Dialog.FullScreen" parent="full">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

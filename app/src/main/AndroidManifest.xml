@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".DialogFragmentActivity"></activity>
+        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".DialogFragmentActivity" />
         <activity android:name=".RedSpotActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

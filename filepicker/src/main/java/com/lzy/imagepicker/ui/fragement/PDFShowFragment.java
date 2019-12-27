@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.callback.PDFTouchCallBack;
+import com.lzy.imagepicker.dialog.PDFRedDotDalog;
 import com.lzy.imagepicker.pdfviewer.PDFView;
 import com.lzy.imagepicker.pdfviewer.util.FitPolicy;
 import com.lzy.imagepicker.view.RedSpotView;
@@ -25,6 +26,7 @@ public class PDFShowFragment extends Fragment {
     private PDFView pdfView;
     private ImageView imgBack;
     private RedSpotView redView;
+    private ImageView imgSet;
 
     public PDFShowFragment setPath(String path) {
         this.path = path;
@@ -44,6 +46,7 @@ public class PDFShowFragment extends Fragment {
         pdfView = (PDFView)  view.findViewById(R.id.pdf_view);
         imgBack = (ImageView) view. findViewById(R.id.img_back);
         redView = (RedSpotView) view. findViewById(R.id.red_view);
+        imgSet = view.findViewById(R.id.img_pdf_set);
         pdfView.setTouchCallBack(new PDFTouchCallBack() {
             @Override
             public void onLongPress(MotionEvent event) {
@@ -78,5 +81,22 @@ public class PDFShowFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+        imgSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSetDialog();
+            }
+        });
+    }
+
+    private void showSetDialog() {
+        PDFRedDotDalog redDalog=new PDFRedDotDalog();
+        redDalog.setCallBack(new PDFRedDotDalog.CallBack() {
+            @Override
+            public void onBack(int center_c, int edge_c, int dpSpot) {
+                redView.setConfigs(center_c,edge_c,dpSpot);
+            }
+        });
+        redDalog.show(getChildFragmentManager(),"PDFRedDotDalog");
     }
 }

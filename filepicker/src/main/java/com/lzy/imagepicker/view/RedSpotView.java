@@ -24,6 +24,35 @@ public class RedSpotView extends View {
     private float x=0;
     private float y=0;
     private int dpm;
+    int center_c=Color.WHITE;
+    int edge_c=Color.RED;
+
+    public int getDpSpot() {
+        return dpSpot;
+    }
+
+    public int getCenter_c() {
+        return center_c;
+    }
+
+    public int getEdge_c() {
+        return edge_c;
+    }
+
+    /**
+     * 设置配置信息。
+     * @param center_c
+     * @param edge_c
+     * @param dpSpot
+     */
+    public void setConfigs(int center_c,int edge_c,int dpSpot){
+        this.center_c=center_c;
+        this.edge_c=edge_c;
+        this.dpSpot=dpSpot;
+        if (dpSpot<5){
+           this.dpSpot=5;
+        }
+    }
 
     public RedSpotView(Context context) {
         super(context);
@@ -44,10 +73,10 @@ public class RedSpotView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (show){
-            RadialGradient radialGradient = new RadialGradient(x, y, dpSpot/2, new int[]{Color.WHITE,Color.WHITE,  Color.RED,Color.RED,Color.TRANSPARENT}, null, Shader.TileMode.MIRROR);
+            RadialGradient radialGradient = new RadialGradient(x, y, dpSpot, new int[]{center_c,center_c,  edge_c,edge_c,Color.TRANSPARENT}, null, Shader.TileMode.MIRROR);
             mPaint.setShader(radialGradient);
             canvas.drawCircle(
-                    x, y, dpSpot/2, mPaint
+                    x, y, dpSpot, mPaint
             );
             show=false;
         }

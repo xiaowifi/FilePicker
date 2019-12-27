@@ -1,10 +1,10 @@
 package com.ying.myfilepocker;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.lzy.imagepicker.MyFilePicker;
 
-public class MyApp extends Application {
+public class MyApp extends MultiDexApplication {
     String TAG="YulanActivity";
     @Override
     public void onCreate() {

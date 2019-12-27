@@ -214,6 +214,7 @@ public class FileDataByMiniTypeSource implements LoaderManager.LoaderCallbacks<C
             }
 
         }
+        Log.e(TAG, "getQueryByMiniTypes: "+new Gson().toJson(miniTypes) );
         StringBuffer buffer=new StringBuffer();
         selectionArgs=new String[miniTypes.size()];
         for (int i=0;i<selectionArgs.length;i++){

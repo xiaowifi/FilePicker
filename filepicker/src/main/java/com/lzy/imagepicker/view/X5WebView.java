@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class X5WebView extends WebView {
 			canvas.drawText("Sys Core", 10, 100, paint);
 		}
 		canvas.drawText(Build.MANUFACTURER, 10, 150, paint);
+		Log.e("", "drawChild: "+Build.MANUFACTURER );
 		canvas.drawText(Build.MODEL, 10, 200, paint);
 		canvas.restore();
 		return ret;

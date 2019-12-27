@@ -1,11 +1,13 @@
 package com.lzy.imagepicker;
 
 import android.app.Application;
+import android.os.Environment;
 import android.util.Log;
 import android.view.WindowManager;
 
 import com.lzy.imagepicker.okgo.OkGo;
 import com.lzy.imagepicker.okgo.interceptor.HttpLoggingInterceptor;
+import com.lzy.imagepicker.okserver.OkDownload;
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -18,6 +20,7 @@ public class MyFilePicker {
     String TAG=this.getClass().getName();
     static MyFilePicker picker;
     boolean x5down=false;
+    public static final String downPath= Environment.getExternalStorageDirectory()+"/yibaitong.down.file";
 
     public boolean isX5down() {
         return x5down;
@@ -62,6 +65,7 @@ public class MyFilePicker {
         loggingInterceptor.setColorLevel(Level.INFO);
         builder.addInterceptor(loggingInterceptor);
         OkGo.getInstance().init(application).setOkHttpClient(builder.build());
+        OkDownload.getInstance().setFolder(downPath).getThreadPool().setCorePoolSize(1);
     }
 
     public int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;

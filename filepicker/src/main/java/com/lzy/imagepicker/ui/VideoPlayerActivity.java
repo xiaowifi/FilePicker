@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.dialog.PDFRedDotDalog;
 import com.lzy.imagepicker.video.LyVideoView;
 
 import me.jessyan.autosize.internal.CancelAdapt;
@@ -42,6 +43,23 @@ public class VideoPlayerActivity extends AppCompatActivity implements CancelAdap
                 onBackPressed();
             }
         });
+        lyVideo.getImg_set().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+    }
+
+    private void showDialog() {
+        PDFRedDotDalog redDalog=new PDFRedDotDalog();
+        redDalog.setCallBack(new PDFRedDotDalog.CallBack() {
+            @Override
+            public void onBack(int center_c, int edge_c, int dpSpot) {
+                lyVideo.getRed_view().setConfigs(center_c,edge_c,dpSpot);
+            }
+        });
+        redDalog.show(getSupportFragmentManager(),"PDFRedDotDalog");
     }
 
     @Override

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         recy_chid.setLayoutManager(new LinearLayoutManager(this));
         acAdapter = new AcAdapter(this);
         recy_chid.setAdapter(acAdapter);
+        acAdapter.addItem(new ActivityBean(WebViewActivity.class,"网络webview"));
         acAdapter.addItem(new ActivityBean(VideosActivity.class,"查询视频列表"));
         acAdapter.addItem(new ActivityBean(FilesActivity.class,"文件查询"));
         acAdapter.addItem(new ActivityBean(FilePickerActivity.class,"仿QQ文件列表"));
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         acAdapter.addItem(new ActivityBean(ShowFragmentActivity.class,"fragment 预览加载"));
         acAdapter.addItem(new ActivityBean(VideoPlayerActivity.class,"视频播放器"));
         acAdapter.addItem(new ActivityBean(DialogFragmentActivity.class,"dialog测试"));
+        acAdapter.addItem(new ActivityBean(WebViewActivity.class,"网络webview"));
         initPicler();
         findViewById(R.id.t_image).setOnClickListener(new View.OnClickListener() {
             @Override
